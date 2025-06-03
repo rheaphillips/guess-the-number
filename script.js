@@ -16,7 +16,13 @@ document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   const message = document.querySelector('.message').textContent;
   if (guess in [...Array(21).keys()] && guess != 0) {
-    message = 'Correct input!';
+    if (secret > guess) {
+      message = 'Too low!';
+    } else if (secret < guess) {
+      message = 'Too high!';
+    } else {
+      message = 'Correct number!';
+    }
   } else {
     message = 'Only #s from 1 to 20 allowed!';
   }
