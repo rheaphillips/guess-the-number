@@ -26,6 +26,7 @@ document.querySelector('.check').addEventListener('click', function () {
       message.textContent = 'Too high!';
     } else {
       message.textContent = 'Correct number!';
+      document.body.style.backgroundColor = '#6a961e';
       if (score.textContent > highscore.textContent) {
         highscore.textContent = score.textContent;
       }
