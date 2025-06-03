@@ -1,5 +1,7 @@
 'use strict';
 
+let secret = Math.round(Math.random() * 19 + 1);
+
 const start = function () {
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = null;
@@ -12,10 +14,10 @@ window.addEventListener('load', start());
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
+  const message = document.querySelector('.message').textContent;
   if (guess in [...Array(21).keys()] && guess != 0) {
-    document.querySelector('.message').textContent = 'Correct input!';
+    message = 'Correct input!';
   } else {
-    document.querySelector('.message').textContent =
-      'Only #s from 1 to 20 allowed!';
+    message = 'Only #s from 1 to 20 allowed!';
   }
 });
