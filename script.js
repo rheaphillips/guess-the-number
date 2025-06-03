@@ -2,6 +2,8 @@
 
 let secret = Math.round(Math.random() * 19 + 1);
 
+let message = document.querySelector('.message');
+
 const start = function () {
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = null;
@@ -13,15 +15,16 @@ const start = function () {
 window.addEventListener('load', start());
 
 document.querySelector('.check').addEventListener('click', function () {
-  const guess = Number(document.querySelector('.guess').value);
-  const message = document.querySelector('.message').textContent;
+  let guess = Number(document.querySelector('.guess').value);
+
   if (guess in [...Array(21).keys()] && guess != 0) {
     if (secret > guess) {
-      message = 'Too low!';
+      message.textContent = 'Too low!';
     } else if (secret < guess) {
-      message = 'Too high!';
+      message.textContent = 'Too high!';
     } else {
-      message = 'Correct number!';
+      message.textContent = 'Correct number!';
+      return;
     }
   } else {
     message = 'Only #s from 1 to 20 allowed!';
