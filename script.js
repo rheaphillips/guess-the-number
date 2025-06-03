@@ -3,6 +3,7 @@
 let secret = Math.round(Math.random() * 19 + 1);
 
 let message = document.querySelector('.message');
+let score = document.querySelector('.score');
 
 const start = function () {
   document.querySelector('.number').textContent = '?';
@@ -26,6 +27,7 @@ document.querySelector('.check').addEventListener('click', function () {
       message.textContent = 'Correct number!';
       return;
     }
+    score.textContent = Number(score.textContent) - 1;
   } else {
     message = 'Only #s from 1 to 20 allowed!';
   }
