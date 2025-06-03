@@ -4,6 +4,7 @@ let secret = Math.round(Math.random() * 19 + 1);
 
 let message = document.querySelector('.message');
 let score = document.querySelector('.score');
+let highscore = document.querySelector('.highscore');
 
 const start = function () {
   document.querySelector('.number').textContent = '?';
@@ -25,6 +26,9 @@ document.querySelector('.check').addEventListener('click', function () {
       message.textContent = 'Too high!';
     } else {
       message.textContent = 'Correct number!';
+      if (score.textContent > highscore.textContent) {
+        highscore.textContent = score.textContent;
+      }
       return;
     }
     score.textContent = Number(score.textContent) - 1;
