@@ -9,3 +9,13 @@ const start = function () {
 };
 
 window.addEventListener('load', start());
+
+document.querySelector('.check').addEventListener('click', function () {
+  const guess = Number(document.querySelector('.guess').value);
+  if (guess in [...Array(21).keys()] && guess != 0) {
+    document.querySelector('.message').textContent = 'Correct input!';
+  } else {
+    document.querySelector('.message').textContent =
+      'Only #s from 1 to 20 allowed!';
+  }
+});
