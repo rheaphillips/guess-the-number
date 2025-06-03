@@ -1,6 +1,6 @@
 'use strict';
 
-let secret;
+let secret = Math.round(Math.random() * 19 + 1);
 let input = document.querySelector('.guess');
 let message = document.querySelector('.message');
 let score = document.querySelector('.score');
@@ -17,6 +17,7 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       message.textContent = 'Correct number!';
       document.body.style.backgroundColor = '#6a961e';
+      document.querySelector('.number').textContent = secret;
       if (score.textContent > highscore.textContent) {
         highscore.textContent = score.textContent;
       }
