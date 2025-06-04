@@ -2,12 +2,16 @@
 
 let secret = Math.round(Math.random() * 19 + 1); // number that is being guessed by the player
 let score = 20; // inital score of the player
+let highscore = 0; // inital highscore of the player
 let gameOver = false; // inital state of the game
 
-// stores HTML elements for easier access
+// stores HTML element guess in a variable for easier access
 const input = document.querySelector('.guess');
-const message = document.querySelector('.message');
-const highscore = document.querySelector('.highscore');
+
+// displays input text in the HTML element class, message
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
 
 // runs game logic
 const runGame = function () {
@@ -17,17 +21,18 @@ const runGame = function () {
   if (guess in [...Array(21).keys()] && guess != 0) {
     // checks whether the guess is lower, higher or equal to the secret number and displays message accordingly
     if (secret > guess) {
-      message.textContent = 'Too low!';
+      displayMessage('Too low!');
     } else if (secret < guess) {
-      message.textContent = 'Too high!';
+      displayMessage('Too high!');
     } else {
-      message.textContent = 'Correct number!';
+      displayMessage('Correct number!');
       document.body.style.backgroundColor = '#6a961e'; // sets background colour to green
       document.querySelector('.number').textContent = secret; // reveals secret number
 
       // resets highscore if score is higher than highscore
-      if (score > highscore.textContent) {
-        highscore.textContent = score;
+      if (score > highscore) {
+        highscore = score;
+        document.querySelector('.highscore').textContent = highscore;
       }
       gameOver = true; // the end of the game is recorded to the user can not keep inputing numbers
       return;
@@ -37,12 +42,12 @@ const runGame = function () {
     score--;
     document.querySelector('.score').textContent = score;
   } else {
-    message.textContent = 'Only #s from 1 to 20 allowed!'; // displays error message if user input is invalid
+    displayMessage('Only #s from 1 to 20 allowed!'); // displays error message if user input is invalid
   }
 
   // the player loses the game if score reaches 0
   if (score == 0) {
-    message.textContent = 'Game Over!';
+    displayMessage('Game Over!');
     document.body.style.backgroundColor = '#78241e'; // sets background colour to red
     gameOver = true; // the end of the game is recorded to the user can not keep inputing numbers
     return;
@@ -64,7 +69,7 @@ document.querySelector('.again').addEventListener('click', function () {
 
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = '';
-  message.textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   document.querySelector('.score').textContent = score;
   document.body.style.backgroundColor = '#222';
 });
