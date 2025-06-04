@@ -3,8 +3,9 @@
 let secret = Math.round(Math.random() * 19 + 1);
 let input = document.querySelector('.guess');
 let message = document.querySelector('.message');
-let score = document.querySelector('.score');
 let highscore = document.querySelector('.highscore');
+
+let score = 20;
 
 document.querySelector('.check').addEventListener('click', function () {
   let guess = Number(input.value);
@@ -18,14 +19,21 @@ document.querySelector('.check').addEventListener('click', function () {
       message.textContent = 'Correct number!';
       document.body.style.backgroundColor = '#6a961e';
       document.querySelector('.number').textContent = secret;
-      if (score.textContent > highscore.textContent) {
-        highscore.textContent = score.textContent;
+      if (score > highscore.textContent) {
+        highscore.textContent = score;
       }
       return;
     }
-    score.textContent = Number(score.textContent) - 1;
+    score--;
+    document.querySelector('.score').textContent = score;
   } else {
     message.textContent = 'Only #s from 1 to 20 allowed!';
+  }
+
+  if (score == 0) {
+    message.textContent = 'Game Over!';
+    document.body.style.backgroundColor = '#78241e';
+    return;
   }
 });
 
@@ -34,6 +42,7 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = null;
   message.textContent = 'Start guessing...';
-  score.textContent = 20;
+  score = 20;
+  document.querySelector('.score').textContent = score;
   document.body.style.backgroundColor = '#222';
 });
